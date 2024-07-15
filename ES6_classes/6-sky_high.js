@@ -14,7 +14,7 @@ export default class SkyHighBuilding extends Building {
     if ((typeof newFl) !== 'number') {
       throw new TypeError('Floors must be a number');
     }
-    this._floors= newFl;
+    this._floors = newFl;
   }
 
   evacuationWarningMessage() {
