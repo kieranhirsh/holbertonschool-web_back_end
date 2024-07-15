@@ -29,10 +29,10 @@ export default class HolbertonClass {
   [Symbol.toPrimitive](dataType) {
     if (dataType === 'string') {
       return (`${this.location}`);
-    } else if (dataType === 'number') {
-      return (`${this.size}`);
-    } else {
-      return null;
     }
+    if (dataType === 'number') {
+      return (`${this.size}`);
+    }
+    return null;
   }
 }
