@@ -9,8 +9,8 @@ export default class HolbertonClass {
   }
 
   set size(newSize) {
-    if ((typeof newSize) !== 'string') {
-      throw new TypeError('Size must be a string');
+    if ((typeof newSize) !== 'number') {
+      throw new TypeError('Size must be a number');
     }
     this._size = newSize;
   }
@@ -20,8 +20,8 @@ export default class HolbertonClass {
   }
 
   set location(newLoc) {
-    if ((typeof newLoc) !== 'number') {
-      throw new TypeError('Location must be a number');
+    if ((typeof newLoc) !== 'string') {
+      throw new TypeError('Location must be a string');
     }
     this._location = newLoc;
   }
