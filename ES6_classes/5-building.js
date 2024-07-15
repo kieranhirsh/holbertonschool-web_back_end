@@ -1,7 +1,6 @@
 export default class Building {
-  constructor(amount, currency) {
+  constructor(sqft) {
     this.sqft = sqft;
-    this.currency = currency;
 
     if (
       this.constructor === Building
