@@ -12,7 +12,7 @@ export default class Currency {
     if ((typeof newCode) !== 'string') {
       throw new TypeError('Code must be a string');
     }
-    this._code = Number(newCode);
+    this._code = newCode;
   }
 
   get name() {
