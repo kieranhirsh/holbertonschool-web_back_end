@@ -1,3 +1,4 @@
 export default function hasValuesFromArray(set, array) {
-  return set.isSupersetOf(new Set(array));
+  const setArray = new Set(array);
+  return set.isSupersetOf(setArray);
 }
