@@ -2,6 +2,6 @@
 """Task 2"""
 
 
-def floor(n: float) -> float:
+def floor(n: float) -> int:
     """Task 2"""
-    return float(floor(n))
+    return float(n)
