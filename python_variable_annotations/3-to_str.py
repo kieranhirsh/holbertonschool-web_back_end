@@ -2,6 +2,6 @@
 """Task 3"""
 
 
-def floor(n: float) -> str:
+def to_str(n: float) -> str:
     """Task 3"""
     return str(n)
