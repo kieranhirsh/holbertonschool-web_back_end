@@ -4,4 +4,4 @@
 
 def floor(n: float) -> int:
     """Task 2"""
-    return float(n)
+    return int(n)
