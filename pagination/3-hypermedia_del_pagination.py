@@ -48,7 +48,6 @@ class Server:
         while (len(data) < page_size and current_index <= max(dataset.keys())):
             if current_index:
                 data.append(dataset[current_index])
-                lines += 1
             current_index += 1
 
         return {
