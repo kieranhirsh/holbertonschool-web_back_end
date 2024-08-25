@@ -5,7 +5,7 @@ from typing import Generator
 import asyncio
 
 
-async def async_generator() -> Generator[float, None]:
+async def async_generator() -> Generator[float, None, None]:
     """Task 0"""
     for x in range(10):
         await asyncio.sleep(1)
