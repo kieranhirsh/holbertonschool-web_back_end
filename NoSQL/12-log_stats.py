@@ -14,17 +14,18 @@ if __name__ == "__main__":
         "PATCH": 0,
         "DELETE": 0
     }
+    
+    status_count = 0
+    for v in collection.find():
+        if 'method' in v:
+            if v['method'] in methods:
+                methods[v['method']] = methods[v['method']] + 1
 
-    all_docs = collection.count_documents({})
-    methods["GET"] = collection.count_documents({"method": "GET"})
-    methods["POST"] = collection.count_documents({"method": "POST"})
-    methods["PUT"] = collection.count_documents({"method": "PUT"})
-    methods["PATCH"] = collection.count_documents({"method": "PATCH"})
-    methods["DELETE"] = collection.count_documents({"method": "DELETE"})
-    status = collection.count_documents({"method": "GET", "path": "/status"})
+            if v['method'] == 'GET' and 'path' in v and v['path'] == '/status':
+                status_count = status_count + 1
 
-    print("{} logs".format(all_docs))
+    print("{} logs".format(collection.count_documents({})))
     print("Methods:")
     for k, v in methods.items():
         print("\tmethod {}: {}".format(k, v))
-    print("{} status check".format(status))
+    print("{} status check".format(status_count))
