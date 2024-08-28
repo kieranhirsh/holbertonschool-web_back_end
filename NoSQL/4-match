@@ -1,5 +1,5 @@
 // my comment
-db.school.insert(
+db.school.find(
   {
     name: "Holberton school"
   }
