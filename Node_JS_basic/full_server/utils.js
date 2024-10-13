@@ -1,31 +1,31 @@
-const fs = require('node:fs/promises');
+const fs = require('fs').promises;
 
-async function readDatabase(filePath) {
+module.exports = async function readDatabase(path) {
   try {
-    const data = await fs.readFile(filePath, 'utf8');
+    const data = await fs.readFile(path, 'utf-8');
     const rows = data.split('\n').slice(1);
 
     const studentsCS = [];
     const studentsSWE = [];
 
     for (const row of rows) {
-      const columns = row.split(',');
+      const data = row.split(',');
 
-      if (columns[3] === 'CS') {
-        studentsCS.push(columns[0]);
+      // if field is CS add to CS array
+      if (data[3] === 'CS') {
+        studentsCS.push(data[0]);
       }
-
-      if (columns[3] === 'SWE') {
-        studentsSWE.push(columns[0]);
+      // if field is SWE add to SWE array
+      if (data[3] === 'SWE') {
+        studentsSWE.push(data[0]);
       }
     }
+
     return {
       CS: studentsCS,
-      SWE: studentsSWE
+      SWE: studentsSWE,
     };
   } catch (err) {
     throw new Error('Cannot load the database');
   }
-}
-
-module.exports = readDatabase;
+};
