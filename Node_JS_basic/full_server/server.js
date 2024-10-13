@@ -1,15 +1,15 @@
-// creating server part 8.5
 const express = require('express');
-const indexRouter = require('./routes/index');
+const router = require('./routes/index');
 
 const app = express();
-const PORT = 1245;
+const port = 1245;
 
-app.use('/', indexRouter);
-app.use('/students', indexRouter);
-app.use('/students/:major', indexRouter);
+app.use('/', router);
+app.use('/students', router);
+app.use('/students/:major', router);
 
-app.listen(PORT, () => {
+app.listen(port, () => {
+  console.log(`Listening at http://localhost:${port}`);
 });
 
 module.exports = app;

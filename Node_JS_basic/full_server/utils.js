@@ -1,31 +1,40 @@
-const fs = require('fs').promises;
+const fs = require('fs');
 
-module.exports = async function readDatabase(path) {
-  try {
-    const data = await fs.readFile(path, 'utf-8');
-    const rows = data.split('\n').slice(1);
-
-    const studentsCS = [];
-    const studentsSWE = [];
-
-    for (const row of rows) {
-      const data = row.split(',');
-
-      // if field is CS add to CS array
-      if (data[3] === 'CS') {
-        studentsCS.push(data[0]);
-      }
-      // if field is SWE add to SWE array
-      if (data[3] === 'SWE') {
-        studentsSWE.push(data[0]);
-      }
+const readDatabase = (path) => new Promise((resolve, reject) => {
+  fs.readFile(path, (error, csvData) => {
+    if (error) {
+      reject(Error('Cannot load the database'));
     }
+    if (csvData) {
+      const fields = {};
+      const dataShow = {};
+      let data = csvData.toString().split('\n');
+      data = data.filter((element) => element.length > 0);
 
-    return {
-      CS: studentsCS,
-      SWE: studentsSWE,
-    };
-  } catch (err) {
-    throw new Error('Cannot load the database');
-  }
-};
+      data.shift();
+      data.forEach((element) => {
+        if (element.length > 0) {
+          const row = element.split(',');
+          if (row[3] in fields) {
+            fields[row[3]].push(row[0]);
+          } else {
+            fields[row[3]] = [row[0]];
+          }
+        }
+      });
+      for (const field in fields) {
+        if (field) {
+          const list = fields[field];
+          dataShow[field] = {
+            list: `List: ${list.toString().replace(/,/g, ', ')}`,
+            number: list.length,
+          };
+        }
+      }
+
+      resolve(dataShow);
+    }
+  });
+});
+
+module.exports = readDatabase;
